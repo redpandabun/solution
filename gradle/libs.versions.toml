@@ -1,0 +1,50 @@
+[versions]
+java = "21"
+kotlin = "2.0.0"
+kotlinLogging = "7.0.0"
+kotlinx-kover = "0.8.1"
+spring-boot = "3.3.0"
+spring-dependencyManagement = "1.1.5"
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kotlinx-kover" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependencyManagement = { id = "io.spring.dependency-management", version.ref = "spring-dependencyManagement" }
+
+[libraries]
+# Kotlin
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+kotlinLogging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "kotlinLogging" }
+
+# Sprng boot
+spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+
+# Jackson
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+[bundles]
+api = [
+  "kotlin-stdlib",
+  "kotlin-reflect",
+  "kotlinLogging",
+  "spring-boot-starter-web"
+]
+
+runtime = [
+  "jackson-module-kotlin"
+]
+
+dev = [
+  "spring-boot-devtools"
+]
+
+test = [
+  "kotlin-test",
+  "spring-boot-starter-test"
+]
