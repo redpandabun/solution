@@ -2,6 +2,7 @@ package com.mysolution.common.error.exceptionhandler
 
 import com.mysolution.common.error.exceptionhandler.provider.BusinessExceptionErrorHandlerProvider
 import com.mysolution.common.error.exceptionhandler.provider.DefaultErrorExceptionHandlerProvider
+import com.mysolution.common.error.exceptionhandler.provider.HttpMessageNotReadableExceptionHandlerProvider
 import com.mysolution.common.error.exceptionhandler.provider.ServletExceptionErrorHandlerProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -21,6 +22,9 @@ class ErrorExceptionHandlerBeanConfig {
   @Bean
   @Order(Ordered.HIGHEST_PRECEDENCE)
   fun businessExceptionHandlerProvider() = BusinessExceptionErrorHandlerProvider
+
+  @Bean
+  fun httpMessageNotReadableExceptionHandlerProvider() = HttpMessageNotReadableExceptionHandlerProvider
 
   @Bean
   fun servletExceptionHandlerProvider() = ServletExceptionErrorHandlerProvider
