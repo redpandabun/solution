@@ -7,6 +7,36 @@ spring:
   threads:
     virtual:
       enabled: true
+  ssl:
+    bundle:
+      pem:
+        https:
+          reload-on-update: true
+          keystore:
+            verify-keys: true
+            certificate: ${MY_CERTIFICATE_PATH}
+            private-key: ${MY_CERTIFICATE_KEY_PATH}
+            private-key-password: ${MY_CERTIFICATE_KEY_PASSWORD:}
   web:
     resources:
       add-mappings: false
+
+server:
+  address: ${MY_ADDRESS:0.0.0.0}
+  port: ${MY_PORT:443}
+  shutdown: graceful
+  ssl:
+    enabled: true
+    bundle: https
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+    jsp:
+      registered: false
+  tomcat:
+    uri-encoding: UTF-8
