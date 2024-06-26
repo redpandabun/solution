@@ -3,7 +3,6 @@ package com.mysolution.common.error.exceptionhandler.provider
 import com.mysolution.common.error.ErrorInfo
 import jakarta.servlet.ServletException
 import org.springframework.http.HttpStatus
-import org.springframework.stereotype.Component
 import org.springframework.web.ErrorResponse
 
 /**
@@ -12,13 +11,12 @@ import org.springframework.web.ErrorResponse
  * @author RedPandaBun
  * @since 0.1.0
  */
-@Component
 object ServletExceptionErrorHandlerProvider : ErrorExceptionHandlerProvider {
   override fun canHandle(exception: Exception): Boolean = exception is ServletException
 
   override fun handle(exception: Exception): ErrorInfo {
     if (exception !is ServletException) {
-      throw IllegalArgumentException("exception is not ServletException")
+      throw IllegalArgumentException("This provider can only handle ServletException")
     }
 
     if (exception !is ErrorResponse) {

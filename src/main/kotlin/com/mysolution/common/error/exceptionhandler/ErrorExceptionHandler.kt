@@ -3,6 +3,8 @@ package com.mysolution.common.error.exceptionhandler
 import com.mysolution.common.error.ErrorInfo
 import com.mysolution.common.error.exceptionhandler.provider.DefaultErrorExceptionHandlerProvider
 import com.mysolution.common.error.exceptionhandler.provider.ErrorExceptionHandlerProvider
+import com.mysolution.common.logging.createLogger
+import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Component
 
 /**
@@ -14,8 +16,13 @@ import org.springframework.stereotype.Component
  * @since 0.1.0
  */
 @Component
-class ErrorExceptionHandler(providers: Set<ErrorExceptionHandlerProvider>) {
-  private val reversedProviders = providers.reversed() // Spring Ordered 의 경우 역순으로 정렬되어 있음
+class ErrorExceptionHandler(private val providers: Set<ErrorExceptionHandlerProvider>) {
+  private final val log = createLogger { }
+
+  @PostConstruct
+  protected fun init() {
+    log.debug { "Mapping providers: " + providers.map { it::class.qualifiedName } }
+  }
 
   /**
    * [ErrorExceptionHandlerProvider] 중 예외를 처리할 수 있는 핸들러를 찾아 처리한다
@@ -33,6 +40,5 @@ class ErrorExceptionHandler(providers: Set<ErrorExceptionHandlerProvider>) {
    * @param exception 처리할 예외
    * @return 처리할 수 있는 핸들러
    */
-  private fun findProvider(exception: Exception) = reversedProviders.firstOrNull { it.canHandle(exception) }
-    ?: DefaultErrorExceptionHandlerProvider
+  private fun findProvider(exception: Exception) = providers.first { it.canHandle(exception) }
 }

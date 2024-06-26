@@ -2,9 +2,6 @@ package com.mysolution.common.error.exceptionhandler.provider
 
 import com.mysolution.common.error.ErrorInfo
 import com.mysolution.common.logging.createLogger
-import org.springframework.core.Ordered.LOWEST_PRECEDENCE
-import org.springframework.core.annotation.Order
-import org.springframework.stereotype.Component
 
 /**
  * 기본 오류 핸들러
@@ -16,10 +13,8 @@ import org.springframework.stereotype.Component
  * @author RedPandaBun
  * @since 0.1.0
  */
-@Component
-@Order(LOWEST_PRECEDENCE)
 object DefaultErrorExceptionHandlerProvider : ErrorExceptionHandlerProvider {
-  private final val log = createLogger {}
+  private val log = createLogger {}
 
   override fun canHandle(exception: Exception) = true // 항상 처리 가능
   override fun handle(exception: Exception): ErrorInfo {
