@@ -1,5 +1,9 @@
 package com.mysolution.user.exception
 
+import com.mysolution.common.error.ErrorCode.INVALID_REQUEST
+import com.mysolution.common.error.ErrorInfo
+import com.mysolution.common.exception.BusinessException
+
 /**
  * 사용자 생성 시 사용자 계정이 중복되는 경우 발생
  *
@@ -9,8 +13,15 @@ package com.mysolution.user.exception
  */
 class AlreadyUsernameException(
   private val username: String,
-  e: Throwable? = null
-) : RuntimeException(
-  "사용자 계정 '${username}'은 이미 존재하는 계정입니다",
-  e
+  cause: Throwable? = null
+) : BusinessException(
+  error = ErrorInfo(
+    code = INVALID_REQUEST,
+    details = mapOf(
+      "type" to "AlreadyUsername",
+      "username" to username
+    )
+  ),
+  message = "사용자 계정 '${username}'은 이미 존재하는 계정입니다",
+  cause = cause
 )
