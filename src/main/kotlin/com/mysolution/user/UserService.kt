@@ -1,7 +1,9 @@
 package com.mysolution.user
 
 import com.mysolution.user.exception.AlreadyUsernameException
+import com.mysolution.user.exception.UserNotFoundException
 import com.mysolution.user.model.CreateUserSpec
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -13,6 +15,18 @@ import java.util.*
  */
 @Service
 class UserService(private val users: UserRepository) {
+
+  /**
+   * ID로 사용자를 조회한다
+   *
+   * @param id 조회 할 사용자 ID
+   * @return 조회된 사용자
+   * @throws UserNotFoundException 사용자가 존재하지 않는 경우
+   */
+  fun findUser(id: Long): User {
+    return users.findByIdOrNull(id)
+      ?: throw UserNotFoundException("User not found: $id")
+  }
 
   /**
    * 사용자 생성
