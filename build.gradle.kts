@@ -57,14 +57,8 @@ kover {
   reports {
     filters {
       excludes {
-        annotatedBy("jakarta.persistence.Entity")
-        annotatedBy("javax.persistence.Embeddable")
-        annotatedBy("javax.persistence.MappedSuperclass")
-
         annotatedBy("org.springframework.context.annotation.Configuration")
         annotatedBy("org.springframework.boot.autoconfigure.SpringBootApplication")
-
-        inheritedFrom("org.springframework.data.repository.Repository")
       }
     }
 
