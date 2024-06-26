@@ -20,6 +20,16 @@ spring:
   web:
     resources:
       add-mappings: false
+  datasource:
+    url: "jdbc:postgresql://${MY_DB_HOST}:${MY_DB_PORT:5432}/${MY_DB_NAME}"
+    username: ${MY_DB_USERNAME}
+    password: ${MY_DB_PASSWORD}
+  jpa:
+    show-sql: false
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
 
 server:
   address: ${MY_ADDRESS:0.0.0.0}
