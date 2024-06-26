@@ -10,7 +10,5 @@ package com.mysolution.common.secret
  */
 @JvmInline
 value class SecretString(val value: String) {
-  constructor(value: CharSequence) : this(value.toString())
-
   override fun toString(): String = "******"
 }

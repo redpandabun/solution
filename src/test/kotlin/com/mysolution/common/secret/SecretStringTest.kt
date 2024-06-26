@@ -7,11 +7,10 @@ import kotlin.test.assertEquals
  * @author RedPandaBun
  * @since 0.1.0
  */
-@Suppress("SpellCheckingInspection")
 class SecretStringTest {
 
   @Test
-  fun `SecretString의 toString 메소드는 언제나 마스킹된 값을 반환해야 한다`() {
+  fun `toString 메소드는 언제나 마스킹된 값을 반환해야 한다`() {
     val secretString = SecretString("my_secret_string")
 
     assertEquals("******", secretString.toString())
