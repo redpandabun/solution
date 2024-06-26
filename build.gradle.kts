@@ -9,6 +9,7 @@ repositories {
 
 plugins {
   alias(libs.plugins.kotlin)
+  alias(libs.plugins.kotlin.jpa)
   alias(libs.plugins.kotlin.spring)
   alias(libs.plugins.kotlinx.kover)
   alias(libs.plugins.spring.boot)
@@ -42,8 +43,15 @@ kotlin {
   }
 }
 
+// kotlin-jpa
+noArg {}
+
 // kotlin-spring
-allOpen {}
+allOpen {
+  annotation("javax.persistence.Entity")
+  annotation("javax.persistence.Embeddable")
+  annotation("javax.persistence.MappedSuperclass")
+}
 
 kover {
   reports {

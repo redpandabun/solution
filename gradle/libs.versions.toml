@@ -9,6 +9,7 @@ springDotenv = "4.0.0"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kotlinx-kover" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
@@ -22,11 +23,15 @@ kotlinLogging = { module = "io.github.oshai:kotlin-logging-jvm", version.ref = "
 
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-dotenv = { module = "me.paulschwarz:spring-dotenv", version.ref = "springDotenv" }
 
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+postgresql = { module = "org.postgresql:postgresql" }
+h2 = { module = "com.h2database:h2" }
 
 [bundles]
 api = [
@@ -34,12 +39,14 @@ api = [
   "kotlin-reflect",
   "kotlinLogging",
   "spring-boot-starter-actuator",
+  "spring-boot-starter-data-jpa",
   "spring-boot-starter-web"
 ]
 
 runtime = [
   "spring-dotenv",
-  "jackson-module-kotlin"
+  "jackson-module-kotlin",
+  "postgresql",
 ]
 
 dev = [
@@ -48,5 +55,6 @@ dev = [
 
 test = [
   "kotlin-test",
-  "spring-boot-starter-test"
+  "spring-boot-starter-test",
+  "h2"
 ]
