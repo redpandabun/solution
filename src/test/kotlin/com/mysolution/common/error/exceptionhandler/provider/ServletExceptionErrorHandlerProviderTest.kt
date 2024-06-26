@@ -20,6 +20,7 @@ import org.junit.jupiter.params.provider.Arguments.of as argumentsOf
  * @author RedPandaBun
  * @since 0.1.0
  */
+@Suppress("SpellCheckingInspection")
 internal class ServletExceptionErrorHandlerProviderTest {
   companion object {
     @JvmStatic
@@ -78,6 +79,17 @@ internal class ServletExceptionErrorHandlerProviderTest {
 
     val expected = DefaultErrorExceptionHandlerProvider.handle(e)
     val actual = ServletExceptionErrorHandlerProvider.handle(e)
+
+    assertEquals(expected, actual)
+  }
+
+  @Test
+  fun `handle 은 HTTP 오류 코드(400~599)가 아닌 오류 코드를 받을 때 기본 핸들러에 처리를 위임해야 한다`() {
+    val exception = mock<ServletException>(withSettings().extraInterfaces(ErrorResponse::class.java))
+    `when`((exception as ErrorResponse).statusCode).thenReturn(HttpStatus.CONTINUE)
+
+    val expected = DefaultErrorExceptionHandlerProvider.handle(exception)
+    val actual = ServletExceptionErrorHandlerProvider.handle(exception)
 
     assertEquals(expected, actual)
   }
