@@ -3,8 +3,10 @@ package com.mysolution.user
 import com.mysolution.user.exception.AlreadyUsernameException
 import com.mysolution.user.exception.UserNotFoundException
 import com.mysolution.user.model.CreateUserSpec
+import jakarta.validation.Valid
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.validation.annotation.Validated
 import java.util.*
 
 /**
@@ -14,6 +16,7 @@ import java.util.*
  * @since 0.1.0
  */
 @Service
+@Validated
 class UserService(private val users: UserRepository) {
 
   /**
@@ -35,7 +38,7 @@ class UserService(private val users: UserRepository) {
    * @return 생성된 사용자
    * @throws AlreadyUsernameException 사용자 계정이 중복되는 경우 발생
    */
-  fun createUser(spec: CreateUserSpec): User {
+  fun createUser(@Valid spec: CreateUserSpec): User {
     val lowerUsername = spec.username.lowercase(Locale.ENGLISH)
 
     // 사용자 계졍 중복 체크

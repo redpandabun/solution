@@ -1,6 +1,8 @@
 package com.mysolution.user.model
 
 import com.mysolution.common.secret.SecretString
+import com.mysolution.user.validation.RawPassword
+import com.mysolution.user.validation.Username
 
 /**
  * 사용자 생성 DTO
@@ -13,6 +15,9 @@ import com.mysolution.common.secret.SecretString
  * @since 0.1.0
  */
 data class CreateUserSpec(
+  @Username
   val username: String,
+
+  @RawPassword
   val password: SecretString
 )
