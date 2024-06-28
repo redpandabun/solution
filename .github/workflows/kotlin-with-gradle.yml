@@ -17,6 +17,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+      - name: Gradle wrapper Permission Change
+        run: chmod +x gradlew
       - name: Build
         run: ./gradlew build --no-daemon
   test:
@@ -30,6 +32,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+      - name: Gradle wrapper Permission Change
+        run: chmod +x gradlew
       - name: Test
         run: ./gradlew test --no-daemon
   reports:
@@ -44,6 +48,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+      - name: Gradle wrapper Permission Change
+        run: chmod +x gradlew
       - name: Generate test coverage report
         run: ./gradlew koverXmlReport --no-daemon
       - name: Upload coverage reports to Codecov
