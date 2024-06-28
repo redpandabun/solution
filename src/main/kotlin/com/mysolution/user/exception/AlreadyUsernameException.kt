@@ -1,6 +1,6 @@
 package com.mysolution.user.exception
 
-import com.mysolution.common.error.ErrorCode.INVALID_REQUEST
+import com.mysolution.common.error.ErrorCode.ALREADY_USERNAME
 import com.mysolution.common.error.ErrorInfo
 import com.mysolution.common.exception.BusinessException
 
@@ -16,11 +16,8 @@ class AlreadyUsernameException(
   cause: Throwable? = null
 ) : BusinessException(
   error = ErrorInfo(
-    code = INVALID_REQUEST,
-    details = mapOf(
-      "type" to "AlreadyUsername",
-      "username" to username
-    )
+    code = ALREADY_USERNAME,
+    errors = "username" to username
   ),
   message = "사용자 계정 '${username}'은 이미 존재하는 계정입니다",
   cause = cause

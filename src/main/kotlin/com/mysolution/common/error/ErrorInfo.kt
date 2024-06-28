@@ -1,7 +1,5 @@
 package com.mysolution.common.error
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.mysolution.common.error.ErrorCode.INVALID_REQUEST
 
 /**
@@ -13,10 +11,11 @@ import com.mysolution.common.error.ErrorCode.INVALID_REQUEST
  */
 data class ErrorInfo(
   val code: ErrorCode,
-
-  @field:JsonIgnore @get:JsonAnyGetter
-  val details: Map<String, Any?>? = null
+  val errors: List<Map<String, Any?>>? = null
 ) {
+  constructor(code: ErrorCode, errors: Map<String, Any?>) : this(code, listOf(errors))
+  constructor(code: ErrorCode, errors: Pair<String, Any?>) : this(code, mapOf(errors))
+
   override fun toString(): String = "${code.httpStatus.value()} ${code.name}"
 
   companion object {

@@ -1,6 +1,6 @@
 package com.mysolution.common.error.exceptionhandler.provider
 
-import com.mysolution.common.error.ErrorCode.INVALID_REQUEST
+import com.mysolution.common.error.ErrorCode.REQUIRES_BODY
 import com.mysolution.common.error.ErrorInfo
 import org.springframework.http.converter.HttpMessageNotReadableException
 
@@ -19,10 +19,7 @@ object HttpMessageNotReadableExceptionHandlerProvider : ErrorExceptionHandlerPro
     }
 
     return ErrorInfo(
-      code = INVALID_REQUEST,
-      details = mapOf(
-        "type" to "EmptyBody"
-      )
+      code = REQUIRES_BODY,
     )
   }
 }
