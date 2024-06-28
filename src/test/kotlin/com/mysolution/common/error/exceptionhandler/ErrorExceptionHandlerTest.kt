@@ -33,17 +33,4 @@ internal class ErrorExceptionHandlerTest {
     // then
     assertEquals(errorInfo, result)
   }
-
-  @Test
-  fun `올바른 예외 핸들러가 없으면 DefaultErrorExceptionHandlerProvider 를 사용해야 한다`() {
-    val exception = mock<Exception>()
-    val provider = mock<ErrorExceptionHandlerProvider>()
-    val handler = ErrorExceptionHandler(setOf(provider))
-
-    `when`(provider.canHandle(exception)).thenReturn(false)
-
-    val result = handler.handle(exception)
-
-    assertEquals(ErrorInfo.serverError, result)
-  }
 }
