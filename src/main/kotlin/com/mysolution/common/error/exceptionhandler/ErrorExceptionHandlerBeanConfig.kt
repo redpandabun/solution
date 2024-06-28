@@ -1,12 +1,9 @@
 package com.mysolution.common.error.exceptionhandler
 
-import com.mysolution.common.error.exceptionhandler.provider.BusinessExceptionErrorHandlerProvider
-import com.mysolution.common.error.exceptionhandler.provider.DefaultErrorExceptionHandlerProvider
-import com.mysolution.common.error.exceptionhandler.provider.HttpMessageNotReadableExceptionHandlerProvider
-import com.mysolution.common.error.exceptionhandler.provider.ServletExceptionErrorHandlerProvider
+import com.mysolution.common.error.exceptionhandler.provider.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.Ordered
+import org.springframework.core.Ordered.HIGHEST_PRECEDENCE
 import org.springframework.core.Ordered.LOWEST_PRECEDENCE
 import org.springframework.core.annotation.Order
 
@@ -20,16 +17,19 @@ import org.springframework.core.annotation.Order
 class ErrorExceptionHandlerBeanConfig {
 
   @Bean
-  @Order(Ordered.HIGHEST_PRECEDENCE)
-  fun businessExceptionHandlerProvider() = BusinessExceptionErrorHandlerProvider
+  @Order(HIGHEST_PRECEDENCE)
+  protected fun businessExceptionHandlerProvider() = BusinessExceptionErrorHandlerProvider
 
   @Bean
-  fun httpMessageNotReadableExceptionHandlerProvider() = HttpMessageNotReadableExceptionHandlerProvider
+  protected fun constraintViolationExceptionHandlerProvider() = ConstraintViolationExceptionHandlerProvider
 
   @Bean
-  fun servletExceptionHandlerProvider() = ServletExceptionErrorHandlerProvider
+  protected fun httpMessageNotReadableExceptionHandlerProvider() = HttpMessageNotReadableExceptionHandlerProvider
+
+  @Bean
+  protected fun servletExceptionHandlerProvider() = ServletExceptionErrorHandlerProvider
 
   @Bean
   @Order(LOWEST_PRECEDENCE)
-  fun defaultExceptionHandlerProvider() = DefaultErrorExceptionHandlerProvider
+  protected fun defaultExceptionHandlerProvider() = DefaultErrorExceptionHandlerProvider
 }
