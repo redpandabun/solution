@@ -1,6 +1,6 @@
 [versions]
 java = "21"
-kotlin = "2.0.0"
+kotlin = "2.0.21"
 kotlinLogging = "7.0.0"
 kotlinx-kover = "0.8.2"
 spring-boot = "3.3.1"
